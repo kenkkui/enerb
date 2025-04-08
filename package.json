@@ -2,12 +2,12 @@
   "name": "ener_b",
   "version": "0.1.0",
   "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
+  "homepage": "https://kenkkui.github.io/ener-b",
+"scripts": {
+  "build": "next build",
+  "export": "next export",
+  "deploy": "gh-pages -d out"
+},
   "dependencies": {
     "@splinetool/react-spline": "^4.0.0",
     "clsx": "^2.1.1",
@@ -25,6 +25,7 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.2.4",
+    "gh-pages": "^6.3.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   }
