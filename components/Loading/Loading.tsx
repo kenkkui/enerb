@@ -1,9 +1,7 @@
 "use client";
 
 import { useAnimate } from "framer-motion";
-import clsx from "clsx";
-import { useCallback, useEffect, useRef, useState } from "react";
-import gsapEasing from "@tools/gsapEasing";
+import { useEffect, useRef, useState } from "react";
 
 interface LoadingProps {
   timeoutDone?: boolean;
@@ -59,7 +57,7 @@ const Loading = ({ timeoutDone }: LoadingProps) => {
     if (timeoutDone) {
       animateText();
     }
-  }, [timeoutDone]);
+  }, [timeoutDone, animateText]);
 
   const loadingText = "loading" + text;
 

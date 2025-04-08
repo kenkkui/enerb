@@ -3,7 +3,6 @@
 import { Suspense, useState } from "react";
 import LoadingSuspense from "./LoadingSuspense";
 import LoadingTimeout from "./LoadingTimeout";
-import BlurDiv from "@components/Blur/BlurDiv";
 
 interface SuspenseElemProps {
   children?: React.ReactNode;
