@@ -2,9 +2,11 @@
 
 @theme {
   --color-primary-blue: #a3d1eb;
+  --color-oval-primary: #b3815f;
   --color-black: #0f0e0e;
   --color-white: #fefefe;
   --color-grey: #e0e0e0;
+  --color-blur: rgba(255, 255, 255, 0.01);
 }
 
 body {

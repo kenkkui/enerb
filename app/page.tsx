@@ -1,12 +1,12 @@
-import LoadingTimeout from "@components/Loading/LoadingTimeout";
+import EnerB from "@components/EnerB";
 import SuspenseElem from "@components/Loading/SuspenseElem";
 
 export default function Home() {
   return (
     <>
-      {/* <SuspenseElem> */}
-      <LoadingTimeout />
-      {/* </SuspenseElem> */}
+      <SuspenseElem>
+        <EnerB />
+      </SuspenseElem>
     </>
   );
 }

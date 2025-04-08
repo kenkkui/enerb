@@ -1,14 +1,29 @@
 "use client";
 
-import React, { Suspense } from "react";
+import { Suspense, useState } from "react";
 import LoadingSuspense from "./LoadingSuspense";
+import LoadingTimeout from "./LoadingTimeout";
+import BlurDiv from "@components/Blur/BlurDiv";
 
 interface SuspenseElemProps {
   children?: React.ReactNode;
 }
 
 const SuspenseElem = ({ children }: SuspenseElemProps) => {
-  return <Suspense fallback={<LoadingSuspense />}>{children}</Suspense>;
+  const [timeoutDone, setTimeoutDone] = useState(false);
+
+  return (
+    <Suspense fallback={<LoadingSuspense />}>
+      <section className="h-screen w-screen relative overflow-hidden">
+        {/* <BlurDiv /> */}
+        <LoadingTimeout
+          setTimeoutDone={setTimeoutDone}
+          timeoutDone={timeoutDone}
+        />
+        {children}
+      </section>
+    </Suspense>
+  );
 };
 
 export default SuspenseElem;

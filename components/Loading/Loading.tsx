@@ -1,9 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useAnimate } from "framer-motion";
+import clsx from "clsx";
+import { useCallback, useEffect, useRef, useState } from "react";
+import gsapEasing from "@tools/gsapEasing";
 
-const Loading = () => {
+interface LoadingProps {
+  timeoutDone?: boolean;
+}
+
+const Loading = ({ timeoutDone }: LoadingProps) => {
+  const [scope, animate] = useAnimate();
   const [text, setText] = useState("");
+  const textElemRef = useRef<HTMLDivElement | null>(null);
+
+  const animateText = () => {
+    console.log("start function: animateText");
+    setTimeout(() => {
+      if (timeoutDone && textElemRef.current) {
+        const rect = textElemRef.current.getBoundingClientRect();
+        const currentY = rect.top;
+
+        const distance = window.innerHeight - currentY;
+
+        animate(
+          textElemRef.current,
+          { y: distance, opacity: 0 },
+          { duration: 1.2, ease: [0.6, 0.04, 0.98, 0.34] }
+        );
+
+        animate(
+          scope.current,
+          { opacity: 0 },
+          { duration: 0.8, ease: "linear", delay: 0.8 }
+        );
+      }
+    }, 1000);
+  };
 
   useEffect(() => {
     const interval = setInterval(
@@ -22,11 +55,25 @@ const Loading = () => {
     return () => clearInterval(interval);
   });
 
+  useEffect(() => {
+    if (timeoutDone) {
+      animateText();
+    }
+  }, [timeoutDone]);
+
   const loadingText = "loading" + text;
 
   return (
-    <div className="h-screen w-screen bg-black text-white text-[24px]  flex justify-center items-center text-center">
-      {loadingText}
+    <div
+      className="h-screen w-screen bg-black text-white text-[24px] overflow-hidden"
+      ref={scope}
+    >
+      <div
+        ref={textElemRef}
+        className="fixed top-1/2 left-1/2 -transform-x-1/2 -transform-y-1/2"
+      >
+        {timeoutDone ? "done" : loadingText}
+      </div>
     </div>
   );
 };
